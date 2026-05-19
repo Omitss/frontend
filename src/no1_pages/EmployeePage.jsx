@@ -14,12 +14,12 @@ const initialState = [
 
 
 const EmployeePage = () => {
-  const [infos, setInfo] = useState(initialState); // JS의 첫 기초, 데이터를 불러면 State를 붙여서 관리한다.
+  const [infos, setInfos] = useState(initialState); // JS의 첫 기초, 데이터를 불러면 State를 붙여서 관리한다.
 
   return (
     <div>
       <EmployeeTable infos = {infos}/>
-      <Register/>
+      <Register setInfos = {setInfos}/> {/* 역상속 */}
     </div>
   )
 }

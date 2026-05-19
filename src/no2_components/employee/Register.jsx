@@ -1,19 +1,26 @@
 //Form태그를 만드는 것
 import React, { useState } from 'react'
 
-const initialState = {
-  name : "", email : "", job : "", pay : null
+const initialState = { //데이터를 저장할 창고
+  id : "", name : "", email : "", job : "", pay : null
 }
 
-const Register = () => {
+const Register = ({setInfos}) => {
   const[info, setInfo] = useState(initialState);
 
-  const handleChange = () => {
-
+  const handleChange = (event) => {
+    const {name, value} = event.target;
+    setInfo((prev)=>(
+      {...prev, [name]:value} // [name]:value에 대해서 다시 공부 ->이걸 해야 타이핑이 쳐짐
+    ))
   }
+  
 
-  const handleSubmit= () => {
-
+  const handleSubmit= (event) => {
+    event.preventDefault();
+    setInfos(prev => (
+      [...prev, info]
+    ))
   }
 
   return (
