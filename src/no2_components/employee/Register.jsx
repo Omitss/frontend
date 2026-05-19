@@ -1,7 +1,13 @@
 //Form태그를 만드는 것
-import React from 'react'
+import React, { useState } from 'react'
+
+const initialState = {
+  name : "", email : "", job : "", pay : null
+}
 
 const Register = () => {
+  const[info, setInfo] = useState(initialState);
+
   const handleChange = () => {
 
   }
@@ -18,7 +24,7 @@ const Register = () => {
         <input 
         type="text" 
         name = "name"
-        value=""
+        value={info.name}
         onChange={handleChange}
       />
       </div>
@@ -27,7 +33,7 @@ const Register = () => {
         <input 
         type="email" 
         name = "email"
-        value=""
+        value={info.email}
         onChange={handleChange}
       />
       </div>
@@ -36,7 +42,7 @@ const Register = () => {
         <input 
         type="text" 
         name = "job"
-        value=""
+        value={info.job}
         onChange={handleChange}
       />
       </div>
@@ -45,7 +51,7 @@ const Register = () => {
         <input 
         type="number" 
         name = "pay"
-        value=""
+        value={info.pay}
         onChange={handleChange}
       />
       </div>     
