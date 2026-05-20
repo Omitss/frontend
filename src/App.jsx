@@ -10,6 +10,7 @@ import EmployeePage from './no1_pages/EmployeePage'
 import HeaderBar from './no2_components/layout/HeaderBar'
 import SiderBar from './no2_components/layout/SiderBar'
 import LoginPage from './no1_pages/user/LoginPage'
+import RegisterPage from './no1_pages/user/RegisterPage'
 
 const initialState = [
   {id:1, username : "john", password : "1111"},
@@ -33,7 +34,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* {console.log(loginMode.username)} */}
+      {console.log(users)}
       <Layout>
 
         <HeaderBar
@@ -53,6 +54,7 @@ function App() {
 
             <Routes>
               <Route path="/login" element={<LoginPage  users = {users} setLoginMode = {setLoginMode}/>} />
+              <Route path="/register" element={<RegisterPage setUsers={setUsers}/>} />
               <Route path="/" element={<HomePage />} />
               <Route path="todo" element={<TodoPage />} />
               <Route path="employee" element={<EmployeePage />} />

@@ -36,7 +36,7 @@ const HeaderBar = ({ isOpen, setIsOpen, loginMode }) => {
             <LoginButton onClick= {()=>navigate("/login")}>
                 로그인
             </LoginButton>
-            <SignupButton>
+            <SignupButton onClick = {()=>navigate("/register")}>
               회원가입
             </SignupButton>
           </div>
