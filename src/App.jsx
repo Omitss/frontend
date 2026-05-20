@@ -41,6 +41,7 @@ function App() {
           loginMode = {loginMode}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
+          setLoginMode = {setLoginMode}
         />
 
         <BodyContainer>
