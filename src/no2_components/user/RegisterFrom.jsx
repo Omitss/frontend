@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
     id : "", username: "", password : "", confirmPassword : ""
@@ -6,6 +7,8 @@ const initialState = {
 
 const RegisterFrom = ({setUsers}) => {
     const[user, setUser] = useState(initialState);
+    const navigate = useNavigate();
+
     const handleChage = (event) => {
         const { name, value} = event.target;
         setUser(prev => (
@@ -27,6 +30,7 @@ const RegisterFrom = ({setUsers}) => {
                 }
             ]
         ))
+        navigate("/login")
         
 
     }

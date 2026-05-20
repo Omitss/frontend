@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
     username : "", password : ""
@@ -6,6 +7,7 @@ const initialState = {
 
 const LoginForm = ({users, setLoginMode}) => {
     const[user, setUser] = useState(initialState);
+    const navigate = useNavigate();
     
     const handleChange = (event) => {
         const{name, value} = event.target;
@@ -24,6 +26,7 @@ const LoginForm = ({users, setLoginMode}) => {
             setLoginMode(prev => (
                 {...prev, isLogin : true, username: loginUser.username}
             ))
+            navigate("/")
         }else{
             alert("사용자가 아닙니다")
         }
