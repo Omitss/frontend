@@ -2,8 +2,11 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
-const HeaderBar = ({ isOpen, setIsOpen }) => {
+const HeaderBar = ({ isOpen, setIsOpen, loginMode }) => {
+  const navigate = useNavigate();
+
 
   return (
     <Header>
@@ -23,15 +26,22 @@ const HeaderBar = ({ isOpen, setIsOpen }) => {
       </LeftArea>
 
       <RightArea>
-
-        <LoginButton>
-          로그인
-        </LoginButton>
-
-        <SignupButton>
-          회원가입
-        </SignupButton>
-
+        {loginMode.isLogin ? 
+        <div>
+          <button>안녕{loginMode.username}님</button>
+          <button>로그아웃</button>
+        </div>
+          :
+          <div>
+            <LoginButton onClick= {()=>navigate("/login")}>
+                로그인
+            </LoginButton>
+            <SignupButton>
+              회원가입
+            </SignupButton>
+          </div>
+        }
+        
       </RightArea>
 
     </Header>
