@@ -1,8 +1,35 @@
 import React, { useState } from 'react'
 
+const initialEmps = [
+  {id:"1", name:"John", email:"John@example.com", job : "forentdend", pay : 600},
+  {id:"2", name:"peter", email:"peter@example.com", job : "backend", pay : 600},
+  {id:"3", name:"Susan", email:"Susan@example.com", job : "db", pay : 600},
+  {id:"4", name:"Sue", email:"Sue@example.com", job : "ai", pay : 600},
+]
 const initialEmp = {
   id : '', name : '', email:'', job: "", pay :""
 }
+
+const initialstate = {
+  empTable : initialEmps,
+  emp : initialEmp
+}
+
+
+const reducer = (state, action) => {
+  switch(action.type){
+    case "change" :
+      const {name, value} = event.target;
+      return
+        {
+          ...state,
+          emp : {...state.emp, [name]:value}
+        }
+    
+    
+  }
+}
+
 
 const EmployeeRegister = ({setState}) => {
   const [emp, setEmp] = useState(initialEmp);

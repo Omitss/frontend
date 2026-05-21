@@ -43,10 +43,17 @@ const EmployeePage = () => {
 }, [selectedID, empTable]) // [selectdID]가 변할때 useEffect를 실행해라
  
 const handleDelete = () => {
+  if(!selectedID){
+    alert("삭제할 데이터를 선택하시오")
+    return;
+  }
+
   setState(prev => (
     {
       ...prev, 
-      empTable : prev.empTable.filter(item => item.id !== selectedID)    
+      empTable : prev.empTable.filter(item => item.id !== selectedID),
+      emp : initialEmp,
+      selectedID : ""
     }
   ))
 }
