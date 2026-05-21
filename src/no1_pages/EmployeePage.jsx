@@ -1,6 +1,9 @@
 //EmployeePage.jsx
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EmployeeList from '../no2_components/employee/EmployeeList'
+import EmployeeTable from '../no2_components/employee/EmployeeTable'
+import EmployeeRegister from '../no2_components/employee/EmployeeRegister'
+import EmployeeUpdate from '../no2_components/employee/EmployeeUpdate'
 
 
 const initialEmps = [
@@ -18,7 +21,7 @@ const initialState = {
   empTable : initialEmps,
   emp : initialEmp,
   mode : "",
-  selectdID : ""
+  selectedID : ""
 }
 
 
@@ -29,10 +32,30 @@ const EmployeePage = () => {
   // const [mode, setMode] = useState("register");
   // const [selectdID] = useState("")
   // 저 한문장으로 initialState 선언으로 한줄로 축약 시킬 수 있음
+  const {empTable, selectedID} = state;
+
+ useEffect(() => {
+  selectedID && 
+  setState(prev => ({
+    ...prev,
+    emp: empTable.find(item => item.id === selectedID)
+  }))
+}, [selectedID]) // [selectdID]가 변할때 useEffect를 실행해라
+ 
 
   return (
     <div>
       <EmployeeList state = {state} setState = {setState}/>
+      <EmployeeTable state = {state}/>
+
+      <div>
+        <button>등록</button>
+        <button>수정</button>
+        <button>삭제</button>
+      </div>
+      
+      <EmployeeRegister />
+      <EmployeeUpdate />
     </div>
   )
 }
