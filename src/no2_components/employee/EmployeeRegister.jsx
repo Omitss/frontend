@@ -4,16 +4,35 @@ const initialEmp = {
   id : '', name : '', email:'', job: "", pay :""
 }
 
-const EmployeeRegister = () => {
+const EmployeeRegister = ({setState}) => {
   const [emp, setEmp] = useState(initialEmp);
+
   const handleChange = (event) => {
     const {name, value} = event.target;
     setEmp(prev => (
       {...prev, [name]:value}
     ))
   }
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    emp && 
+    setState(prev => (
+      {
+        ...prev,
+        empTable : [
+          ...prev.empTable,
+          {...emp, id : Date.now()}
+        ]
+      }
+    ))
+    setState(prev => ({
+      ...prev, 
+      selectedID : prev.empTable[prev.empTable.length - 1].id
+    }))
+    
+    setEmp(initialEmp)
   }
 
   return (

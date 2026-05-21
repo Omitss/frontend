@@ -53,8 +53,8 @@ const EmployeePage = () => {
         <button>수정</button>
         <button>삭제</button>
       </div>
-      
-      <EmployeeRegister />
+
+      <EmployeeRegister setState={setState}/>
       <EmployeeUpdate />
     </div>
   )
