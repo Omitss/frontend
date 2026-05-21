@@ -1,25 +1,38 @@
+//EmployeePage.jsx
 import React, { useState } from 'react'
-import EmployeeTable from '../no2_components/employee/EmployeeTable';
-import Register from '../no2_components/employee/Register';
+import EmployeeList from '../no2_components/employee/EmployeeList'
 
-const initialState = [
-  {id:1, name:"John", email:"John@example.com", job : "forentdend", pay : 600},
-  {id:2, name:"peter", email:"peter@example.com", job : "backend", pay : 600},
-  {id:3, name:"Susan", email:"Susan@example.com", job : "db", pay : 600},
-  {id:4, name:"Sue", email:"Sue@example.com", job : "ai", pay : 600},
+
+const initialEmps = [
+  {id:"1", name:"John", email:"John@example.com", job : "forentdend", pay : 600},
+  {id:"2", name:"peter", email:"peter@example.com", job : "backend", pay : 600},
+  {id:"3", name:"Susan", email:"Susan@example.com", job : "db", pay : 600},
+  {id:"4", name:"Sue", email:"Sue@example.com", job : "ai", pay : 600},
 ]
-{/* 데이터를 받는다 -> JS에서는 state관리를 한다
-  const [info, setInfo] = useState(초기값)
-  */}
+
+const initialEmp = {
+  id : '', name : '', email:'', job: "", pay :""
+}
+
+const initialState = {
+  empTable : initialEmps,
+  emp : initialEmp,
+  mode : "",
+  selectdID : ""
+}
 
 
 const EmployeePage = () => {
-  const [infos, setInfos] = useState(initialState); // JS의 첫 기초, 데이터를 불러면 State를 붙여서 관리한다.
+  const [state, setState] = useState(initialState);
+  // const [empTable, setEmpTable] = useState(initialEmps);
+  // const [emp, setEmp] = useState(initialEmp);
+  // const [mode, setMode] = useState("register");
+  // const [selectdID] = useState("")
+  // 저 한문장으로 initialState 선언으로 한줄로 축약 시킬 수 있음
 
   return (
     <div>
-      <EmployeeTable infos = {infos}/>
-      <Register setInfos = {setInfos}/> {/* 역상속 */}
+      <EmployeeList state = {state} setState = {setState}/>
     </div>
   )
 }
