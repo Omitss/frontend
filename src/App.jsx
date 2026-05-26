@@ -11,6 +11,7 @@ import HeaderBar from './no2_components/layout/HeaderBar'
 import SiderBar from './no2_components/layout/SiderBar'
 import LoginPage from './no1_pages/user/LoginPage'
 import RegisterPage from './no1_pages/user/RegisterPage'
+import EmployeeProvider from './no0_context/EmployeeContext'
 
 const initialState = [
   {id:1, username : "john", password : "1111"},
@@ -58,7 +59,11 @@ function App() {
               <Route path="/register" element={<RegisterPage setUsers={setUsers}/>} />
               <Route path="/" element={<HomePage />} />
               <Route path="todo" element={<TodoPage />} />
-              <Route path="employee" element={<EmployeePage />} />
+              <Route path="employee" element={
+                <EmployeeProvider>
+                  <EmployeePage />
+                </EmployeeProvider>
+                } />
 
             </Routes>
 

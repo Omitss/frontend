@@ -1,12 +1,16 @@
-import React from 'react'
+//EmployeeTable.jsx
+import React, { useContext } from 'react'
+import { EmployeeContext } from '../../no0_context/EmployeeContext';
 
-const EmployeeTable = ({state}) => {
+const EmployeeTable = () => {
+  const {state} = useContext(EmployeeContext);
   const {emp} = state;
+
   return (
     <>
       <table>
         <tr>
-          {emp && Object.keys(emp).map(key =>( // emp라는 데이터가 들어오면 실행해라 
+          {emp && Object.keys(emp).map(key =>( 
             <th>{key}</th>
           ))}
         </tr>

@@ -1,5 +1,6 @@
 // EmployeeRegister.jsx
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { EmployeeContext } from '../../no0_context/EmployeeContext'
 
 const initialEmps = [
   {id:"1", name:"John", email:"John@example.com", job : "forentdend", pay : 600},
@@ -17,7 +18,9 @@ const initialstate = {
 }
 
 
-const EmployeeRegister = ({dispatch}) => {
+const EmployeeRegister = () => {
+  const {dispatch} = useContext(EmployeeContext);
+
   const [emp, setEmp] = useState(initialEmp);
 
   const handleChange = (event) => {
@@ -29,26 +32,8 @@ const EmployeeRegister = ({dispatch}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const newId = Date.now().toString();
-
     dispatch({type : "register", payload: {newId, emp}})
-
-    // emp && 
-    // setState(prev => (
-    //   {
-    //     ...prev,
-    //     empTable : [
-    //       ...prev.empTable,
-    //       {...emp, id : Date.now()}
-    //     ]
-    //   }
-    // ))
-    // setState(prev => ({
-    //   ...prev, 
-    //   selectedID : prev.empTable[prev.empTable.length - 1].id
-    // }))
-    
     setEmp(initialEmp)
   }
 

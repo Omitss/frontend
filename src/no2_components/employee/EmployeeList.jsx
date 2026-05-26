@@ -1,19 +1,21 @@
 //EmployeeList.jsx
-import React from 'react'
+import React, { useContext } from 'react'
+import { EmployeeContext } from '../../no0_context/EmployeeContext'
 
-const EmployeeList = ({state, dispatch}) => {
-    const {empTable} = state; // state에서 필요한 값인 empTable만 가져오겠다.
+const EmployeeList = () => {
+    const{state, dispatch} = useContext(EmployeeContext)
+    const {empTable, selectedID} =state;
+
+
     const handleClick = (id) => {
-        console.log("id : ", id)
+        
         dispatch({type : "select", payload : id})
-        // setState(prev => (            
-        //     {...prev, selectedID: id}
-        // ))
     }
 
   return (
+    
     <div>
-      {empTable.map(item => (
+      {empTable?.map(item => (
         <button onClick={()=>handleClick(item.id)}
         >
             {item.name}

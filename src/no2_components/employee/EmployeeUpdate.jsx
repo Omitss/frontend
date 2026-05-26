@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from 'react'
+// EmployeeUpdate.jsx
+import React, { useContext, useEffect, useState } from 'react'
+import { EmployeeContext } from '../../no0_context/EmployeeContext';
 
-const EmployeeUpdate = ({emp, dispatch}) => {
+const EmployeeUpdate = () => {
+  const{state, dispatch} = useContext(EmployeeContext);
+  const {emp} = state;
+
   const [newEmp, setNewEmp] = useState(emp);
 
   useEffect(()=> {
