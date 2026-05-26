@@ -1,3 +1,4 @@
+// EmployeeRegister.jsx
 import React, { useState } from 'react'
 
 const initialEmps = [
@@ -16,22 +17,7 @@ const initialstate = {
 }
 
 
-const reducer = (state, action) => {
-  switch(action.type){
-    case "change" :
-      const {name, value} = event.target;
-      return
-        {
-          ...state,
-          emp : {...state.emp, [name]:value}
-        }
-    
-    
-  }
-}
-
-
-const EmployeeRegister = ({setState}) => {
+const EmployeeRegister = ({dispatch}) => {
   const [emp, setEmp] = useState(initialEmp);
 
   const handleChange = (event) => {
@@ -44,20 +30,24 @@ const EmployeeRegister = ({setState}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    emp && 
-    setState(prev => (
-      {
-        ...prev,
-        empTable : [
-          ...prev.empTable,
-          {...emp, id : Date.now()}
-        ]
-      }
-    ))
-    setState(prev => ({
-      ...prev, 
-      selectedID : prev.empTable[prev.empTable.length - 1].id
-    }))
+    const newId = Date.now().toString();
+
+    dispatch({type : "register", payload: {newId, emp}})
+
+    // emp && 
+    // setState(prev => (
+    //   {
+    //     ...prev,
+    //     empTable : [
+    //       ...prev.empTable,
+    //       {...emp, id : Date.now()}
+    //     ]
+    //   }
+    // ))
+    // setState(prev => ({
+    //   ...prev, 
+    //   selectedID : prev.empTable[prev.empTable.length - 1].id
+    // }))
     
     setEmp(initialEmp)
   }

@@ -1,13 +1,14 @@
 //EmployeeList.jsx
 import React from 'react'
 
-const EmployeeList = ({state, setState}) => {
+const EmployeeList = ({state, dispatch}) => {
     const {empTable} = state; // state에서 필요한 값인 empTable만 가져오겠다.
     const handleClick = (id) => {
         console.log("id : ", id)
-        setState(prev => (            
-            {...prev, selectedID: id}
-        ))
+        dispatch({type : "select", payload : id})
+        // setState(prev => (            
+        //     {...prev, selectedID: id}
+        // ))
     }
 
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const EmployeeUpdate = ({emp, setState}) => {
+const EmployeeUpdate = ({emp, dispatch}) => {
   const [newEmp, setNewEmp] = useState(emp);
 
   useEffect(()=> {
@@ -16,15 +16,18 @@ const EmployeeUpdate = ({emp, setState}) => {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    setState(prev => (
-      {
-        ...prev, 
-        empTable:prev.empTable.map(item => (
-          item.id === emp.id ? 
-          newEmp : item
-        ))
-      }
-    ))
+
+    dispatch({type:"update", payload:newEmp})
+
+    // setState(prev => (
+    //   {
+    //     ...prev, 
+    //     empTable:prev.empTable.map(item => (
+    //       item.id === emp.id ? 
+    //       newEmp : item
+    //     ))
+    //   }
+    // ))
   }
 
   return (
