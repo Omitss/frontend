@@ -1,16 +1,19 @@
 // HeaderBar.jsx
 
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../../no0_context/UserContext'
 
-const HeaderBar = ({ isOpen, setIsOpen, loginMode, setLoginMode }) => {
+const HeaderBar = ({ isOpen, setIsOpen}) => {
+
+  const {state, dispatch} = useContext(UserContext);
+  //const {isLogin} = state;
 
   const navigate = useNavigate()
   const handleLogout = () => {
-    setLoginMode(prev => (
-      {...prev, isLogin : false, username : ''}
-    ))
+    dispatch({type:"logout"})
+
     alert("로그아웃 됬습니다")
 
     navigate("/login")
@@ -38,12 +41,12 @@ const HeaderBar = ({ isOpen, setIsOpen, loginMode, setLoginMode }) => {
       <RightArea>
 
         {
-          loginMode.isLogin ?
+          state.isLogin ?
 
             <UserArea>
 
               <UserName>
-                👋 {loginMode.username}님
+                👋 {state.username}님
               </UserName>
 
               <LogoutButton

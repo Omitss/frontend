@@ -1,12 +1,10 @@
 import React from 'react'
 import RegisterFrom from '../../no2_components/user/RegisterFrom'
 
-const RegisterPage = ({setUsers}) => {
+const RegisterPage = () => {
   return (
     <>
-    <RegisterFrom 
-    setUsers = {setUsers}
-    />      
+    <RegisterFrom/>      
     </>
   )
 }

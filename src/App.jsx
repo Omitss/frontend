@@ -12,67 +12,67 @@ import SiderBar from './no2_components/layout/SiderBar'
 import LoginPage from './no1_pages/user/LoginPage'
 import RegisterPage from './no1_pages/user/RegisterPage'
 import EmployeeProvider from './no0_context/EmployeeContext'
-
-const initialState = [
-  {id:1, username : "john", password : "1111"},
-  {id:2, username : "peter", password : "1111"},
-  {id:3, username : "susan", password : "1111"},
-  {id:4, username : "Sue", password : "1111"}
-]
-
-const initialMod = {
-  isLogin : false, 
-  username : ""
-}
+import UserProvider from './no0_context/UserContext'
 
 
 
 function App() {
-  const [users, setUsers] = useState(initialState);
-  const [loginMode, setLoginMode] = useState(initialMod);
+  
+  
 
   const [isOpen, setIsOpen] = useState(false)
 
   return (
     <BrowserRouter>
-      {console.log(users)}
-      <Layout>
 
-        <HeaderBar
-          loginMode = {loginMode}
+  <UserProvider>
+
+    <Layout>
+
+      <HeaderBar
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
+
+      <BodyContainer>
+
+        <SiderBar
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          setLoginMode = {setLoginMode}
         />
 
-        <BodyContainer>
+        <Content>
 
-          <SiderBar
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          />
+          <Routes>
 
-          <Content>
+            <Route path="/" element={<HomePage />} />
 
-            <Routes>
-              <Route path="/login" element={<LoginPage  users = {users} setLoginMode = {setLoginMode}/>} />
-              <Route path="/register" element={<RegisterPage setUsers={setUsers}/>} />
-              <Route path="/" element={<HomePage />} />
-              <Route path="todo" element={<TodoPage />} />
-              <Route path="employee" element={
+            <Route path="/todo" element={<TodoPage />} />
+
+            <Route
+              path="/employee"
+              element={
                 <EmployeeProvider>
                   <EmployeePage />
                 </EmployeeProvider>
-                } />
+              }
+            />
 
-            </Routes>
+            <Route path="/login" element={<LoginPage />} />
 
-          </Content>
+            <Route path="/register" element={<RegisterPage />} />
 
-        </BodyContainer>
+          </Routes>
 
-      </Layout>
-    </BrowserRouter>
+        </Content>
+
+      </BodyContainer>
+
+    </Layout>
+
+  </UserProvider>
+
+</BrowserRouter>
   )
 }
 
