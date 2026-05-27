@@ -1,45 +1,39 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { TodoContext } from '../../no0_context/TodoContext'
 
-const TodoInsert = ({todoObj, setState}) => {
+const TodoInsert = () => {
+
+    const {state, dispatch} = useContext(TodoContext);
+
+    const {todoObj} = state;
 
     const handleChange = (e) => {
+
         const {name, value} = e.target;
 
-        setState(prev => ({
-            ...prev,
-            todoObj : {
-                ...prev.todoObj,
-                [name] : value
+        dispatch({
+            type : "CHANGE",
+
+            payload : {
+                name,
+                value
             }
-        }))
+        })
     }
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
 
-        setState(prev => ({
-            ...prev,
-            todoList : [
-                ...prev.todoList,
-                {
-                    ...prev.todoObj,
-                    id :
-                        prev.todoList.length > 0
-                            ? Math.max(...prev.todoList.map(item => item.id)) + 1
-                            : 1
-                }
-            ],
-            todoObj : {
-                id : "",
-                subject : "",
-                checked : false
-            }
-        }))
+        dispatch({
+            type : "INSERT"
+        })
     }
 
     return (
         <Form onSubmit={handleSubmit}>
+
             <Input
                 type="text"
                 name="subject"
@@ -50,12 +44,12 @@ const TodoInsert = ({todoObj, setState}) => {
             />
 
             <Button>입력</Button>
+
         </Form>
     )
 }
 
 export default TodoInsert
-
 
 const Form = styled.form`
     display: flex;
@@ -78,4 +72,4 @@ const Button = styled.button`
     padding: 0 20px;
     border-radius: 8px;
     cursor: pointer;
-`
+`   

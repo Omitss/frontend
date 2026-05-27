@@ -18,3 +18,8 @@ action.type : 함수의 타입
 action.payload : state 변화시킬 수 있는 인수
 
 [아이콘 라이브러리 받는법] : npm install react-icons
+
+useSate => useReducer => useContext => redux
+
+context : state, 내부함수(reducers)
+redux : state, 내부함수(reducer), 외부함수(extraReducers === API)   

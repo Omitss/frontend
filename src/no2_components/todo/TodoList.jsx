@@ -1,19 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import TodoListChild from './TodoListChild'
 import styled from 'styled-components'
+import { TodoContext } from '../../no0_context/TodoContext'
 
-const TodoList = ({todoList, setState}) => {
-  return (
-    <ListBox>
-        {todoList?.map(item => (
-            <TodoListChild
-                setState={setState}
-                key={item.id}
-                item={item}
-            />
-        ))}
-    </ListBox>
-  )
+const TodoList = () => {
+
+    const {state} = useContext(TodoContext);
+
+    const {todoList} = state;
+
+    return (
+
+        <ListBox>
+
+            {
+                todoList.map(item => (
+
+                    <TodoListChild
+                        key={item.id}
+                        item={item}
+                    />
+                ))
+            }
+
+        </ListBox>
+    )
 }
 
 export default TodoList

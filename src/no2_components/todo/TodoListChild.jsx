@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
     MdCheckBox,
     MdCheckBoxOutlineBlank,
@@ -6,43 +6,44 @@ import {
 } from "react-icons/md"
 
 import styled from 'styled-components'
+import { TodoContext } from '../../no0_context/TodoContext'
 
-const TodoListChild = ({item, setState}) => {
+const TodoListChild = ({item}) => {
+
+    const {dispatch} = useContext(TodoContext);
 
     const [editing, setEditing] = useState(false)
     const [value, setValue] = useState(item.subject)
 
     const handleToggle = () => {
-        setState(prev => ({
-            ...prev,
-            todoList : prev.todoList.map(todo =>
-                todo.id === item.id
-                    ? {...todo, checked : !todo.checked}
-                    : todo
-            )
-        }))
+
+        dispatch({
+            type : "TOGGLE",
+            payload : item.id
+        })
     }
 
     const handleUpdate = () => {
-        setState(prev => ({
-            ...prev,
-            todoList : prev.todoList.map(todo =>
-                todo.id === item.id
-                    ? {...todo, subject : value}
-                    : todo
-            )
-        }))
+
+        dispatch({
+
+            type : "UPDATE",
+
+            payload : {
+                id : item.id,
+                value
+            }
+        })
 
         setEditing(false)
     }
 
     const handleDelete = () => {
-        setState(prev => ({
-            ...prev,
-            todoList : prev.todoList.filter(todo =>
-                todo.id !== item.id
-            )
-        }))
+
+        dispatch({
+            type : "DELETE",
+            payload : item.id
+        })
     }
 
     return (
@@ -51,12 +52,13 @@ const TodoListChild = ({item, setState}) => {
             <CheckBox onClick={handleToggle}>
                 {
                     item.checked
-                        ? <MdCheckBox/>
-                        : <MdCheckBoxOutlineBlank/>
+                    ? <MdCheckBox/>
+                    : <MdCheckBoxOutlineBlank/>
                 }
             </CheckBox>
 
             <Content>
+
                 {
                     editing
                     ?
@@ -79,6 +81,7 @@ const TodoListChild = ({item, setState}) => {
                         {item.subject}
                     </Checked>
                 }
+
             </Content>
 
             <DeleteButton onClick={handleDelete}>
@@ -90,7 +93,6 @@ const TodoListChild = ({item, setState}) => {
 }
 
 export default TodoListChild
-
 
 const ItemBox = styled.div`
     display: flex;

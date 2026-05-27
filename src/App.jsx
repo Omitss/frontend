@@ -13,7 +13,7 @@ import LoginPage from './no1_pages/user/LoginPage'
 import RegisterPage from './no1_pages/user/RegisterPage'
 import EmployeeProvider from './no0_context/EmployeeContext'
 import UserProvider from './no0_context/UserContext'
-
+import TodoProvider from './no0_context/TodoContext'
 
 
 function App() {
@@ -39,7 +39,14 @@ function App() {
           <Content>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/todo" element={<TodoPage />} />
+              <Route
+                path="/todo"
+                element={
+              <TodoProvider>
+                  <TodoPage />
+              </TodoProvider>
+                }
+/>
               <Route
                 path="/employee"
                 element={
