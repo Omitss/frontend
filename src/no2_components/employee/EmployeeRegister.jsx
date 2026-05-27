@@ -2,26 +2,26 @@
 import React, { useContext, useState } from 'react'
 import { EmployeeContext } from '../../no0_context/EmployeeContext'
 
-const initialEmps = [
-  {id:"1", name:"John", email:"John@example.com", job : "forentdend", pay : 600},
-  {id:"2", name:"peter", email:"peter@example.com", job : "backend", pay : 600},
-  {id:"3", name:"Susan", email:"Susan@example.com", job : "db", pay : 600},
-  {id:"4", name:"Sue", email:"Sue@example.com", job : "ai", pay : 600},
-]
-const initialEmp = {
-  id : '', name : '', email:'', job: "", pay :""
-}
+// const initialEmps = [
+//   {id:"1", name:"John", email:"John@example.com", job : "forentdend", pay : 600},
+//   {id:"2", name:"peter", email:"peter@example.com", job : "backend", pay : 600},
+//   {id:"3", name:"Susan", email:"Susan@example.com", job : "db", pay : 600},
+//   {id:"4", name:"Sue", email:"Sue@example.com", job : "ai", pay : 600},
+// ]
+// const initialEmp = {
+//   id : '', name : '', email:'', job: "", pay :""
+// }
 
-const initialstate = {
-  empTable : initialEmps,
-  emp : initialEmp
-}
+// const initialstate = {
+//   empTable : initialEmps,
+//   emp : initialEmp
+// }
 
 
 const EmployeeRegister = () => {
-  const {dispatch} = useContext(EmployeeContext);
+  const {state, dispatch} = useContext(EmployeeContext);
 
-  const [emp, setEmp] = useState(initialEmp);
+  const [emp, setEmp] = useState(state.emp);
 
   const handleChange = (event) => {
     const {name, value} = event.target;
@@ -34,7 +34,7 @@ const EmployeeRegister = () => {
     event.preventDefault();
     const newId = Date.now().toString();
     dispatch({type : "register", payload: {newId, emp}})
-    setEmp(initialEmp)
+    setEmp(state.emp)
   }
 
   return (

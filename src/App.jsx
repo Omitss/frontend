@@ -25,53 +25,36 @@ function App() {
   return (
     <BrowserRouter>
 
-  <UserProvider>
-
-    <Layout>
-
-      <HeaderBar
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
-
-      <BodyContainer>
-
-        <SiderBar
+    <UserProvider>
+      <Layout>
+        <HeaderBar
           isOpen={isOpen}
           setIsOpen={setIsOpen}
         />
-
-        <Content>
-
-          <Routes>
-
-            <Route path="/" element={<HomePage />} />
-
-            <Route path="/todo" element={<TodoPage />} />
-
-            <Route
-              path="/employee"
-              element={
-                <EmployeeProvider>
-                  <EmployeePage />
-                </EmployeeProvider>
-              }
-            />
-
-            <Route path="/login" element={<LoginPage />} />
-
-            <Route path="/register" element={<RegisterPage />} />
-
-          </Routes>
-
-        </Content>
-
-      </BodyContainer>
-
-    </Layout>
-
+        <BodyContainer>
+          <SiderBar
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
+          <Content>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/todo" element={<TodoPage />} />
+              <Route
+                path="/employee"
+                element={
+                  <EmployeeProvider>
+                    <EmployeePage />
+                  </EmployeeProvider>
+                }
+              />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </Routes>
+          </Content>
+        </BodyContainer>
+      </Layout>
   </UserProvider>
-
 </BrowserRouter>
   )
 }
