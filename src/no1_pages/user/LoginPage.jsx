@@ -3,8 +3,7 @@ import LoginForm from '../../no2_components/user/LoginForm'
 
 const LoginPage = () => {
   return (
-    <LoginForm />
+    <LoginForm/>
   )
 }
-
 export default LoginPage

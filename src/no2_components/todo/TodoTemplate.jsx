@@ -1,41 +1,46 @@
-//TodoTemplate.jsx
+// TodoTemplate.jsx
 
 import React from 'react'
 import styled from 'styled-components'
 
-const TodoTemplate = ({children}) => {
+const TodoTemplate = ({ children }) => {
   return (
     <Container>
-        <Title>일정관리</Title>
-
-        <Content>
-            {children}
-        </Content>
+      <Title>📋 일정 관리</Title>
+      <Content>
+        {children}
+      </Content>
     </Container>
   )
 }
 
 export default TodoTemplate
 
-
 const Container = styled.div`
-    width: 500px;
-    margin: 50px auto;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0,0,0,0.15);
-    background: white;
+  width: 500px;
+
+  margin: 60px auto;
+
+  background: #ffffff;
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 `
 
-const Title = styled.div`
-    background: #7950f2;
-    color: white;
-    font-size: 28px;
-    font-weight: bold;
-    padding: 24px;
-    text-align: center;
+const Title = styled.h1`
+  text-align: center;
+
+  margin-bottom: 30px;
+
+  color: #222;
 `
 
 const Content = styled.div`
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
 `

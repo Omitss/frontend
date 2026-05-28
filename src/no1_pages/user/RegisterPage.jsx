@@ -1,11 +1,9 @@
 import React from 'react'
-import RegisterFrom from '../../no2_components/user/RegisterFrom'
+import RegisterForm from '../../no2_components/user/RegisterForm'
 
 const RegisterPage = () => {
   return (
-    <>
-    <RegisterFrom/>      
-    </>
+    <RegisterForm/>
   )
 }
 

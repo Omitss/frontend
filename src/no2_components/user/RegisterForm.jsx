@@ -4,12 +4,15 @@ import styled from 'styled-components';
 import { UserContext } from '../../no0_context/UserContext';
 
 const initialState = {
+  id: "",
   username: "",
-  password: ""
+  password: "",
+  confirmPassword: ""
 }
-const LoginForm = () => {
-  const {state, dispatch} = useContext(UserContext);
- 
+
+const RegisterForm = () => {
+  const {dispatch} = useContext(UserContext);
+
   const [user, setUser] = useState(initialState);
   const navigate = useNavigate();
 
@@ -23,31 +26,31 @@ const LoginForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    const loginUser = state.users.filter(item => (
-      item.username === user.username &&
-      item.password === user.password
-    ))[0]
-
-    if (loginUser) {
-      alert("로그인 성공")
-      dispatch({type:"login", payload:loginUser})
-      navigate("/")
-    } else {
-      alert("아이디 또는 비밀번호가 올바르지 않습니다.")
+    if (user.password !== user.confirmPassword) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
     }
+    dispatch({type:"register", payload: {
+      id: Date.now(), 
+      user
+    }})
+
+    alert("회원가입 성공")
+
+    navigate("/login")
   }
 
   return (
     <Container>
+
       <Form onSubmit={handleSubmit}>
 
         <Logo>MySystem</Logo>
 
-        <Title>로그인</Title>
+        <Title>회원가입</Title>
 
         <Description>
-          계정에 로그인하여 서비스를 이용하세요.
+          새로운 계정을 생성하세요.
         </Description>
 
         <InputGroup>
@@ -74,25 +77,38 @@ const LoginForm = () => {
           />
         </InputGroup>
 
-        <LoginButton>
-          로그인
-        </LoginButton>
+        <InputGroup>
+          <Label>비밀번호 확인</Label>
 
-        <Divider />
+          <Input
+            type="password"
+            name="confirmPassword"
+            value={user.confirmPassword}
+            onChange={handleChange}
+            placeholder="비밀번호 다시 입력"
+          />
+        </InputGroup>
 
-        <RegisterButton
-          type="button"
-          onClick={() => navigate("/register")}
-        >
+        <RegisterButton>
           회원가입
         </RegisterButton>
 
+        <Divider />
+
+        <LoginButton
+          type="button"
+          onClick={() => navigate("/login")}
+        >
+          이미 회원이신가요? 로그인
+        </LoginButton>
+
       </Form>
+
     </Container>
   )
 }
 
-export default LoginForm;
+export default RegisterForm;
 
 
 const Container = styled.div`
@@ -103,14 +119,14 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
+  padding: 20px;
+
   background: linear-gradient(
     135deg,
     #e0f2fe,
     #f8fafc,
     #dbeafe
   );
-
-  padding: 20px;
 `
 
 const Form = styled.form`
@@ -132,11 +148,12 @@ const Form = styled.form`
 `
 
 const Logo = styled.div`
+  text-align: center;
+
   font-size: 30px;
   font-weight: 800;
-  color: #2563eb;
 
-  text-align: center;
+  color: #2563eb;
 
   margin-bottom: 12px;
 `
@@ -145,6 +162,7 @@ const Title = styled.h2`
   text-align: center;
 
   font-size: 28px;
+
   color: #0f172a;
 
   margin-bottom: 10px;
@@ -213,7 +231,7 @@ const BaseButton = styled.button`
   transition: 0.2s;
 `
 
-const LoginButton = styled(BaseButton)`
+const RegisterButton = styled(BaseButton)`
   background: #2563eb;
   color: white;
 
@@ -234,7 +252,7 @@ const Divider = styled.div`
   margin: 24px 0;
 `
 
-const RegisterButton = styled(BaseButton)`
+const LoginButton = styled(BaseButton)`
   background: #eff6ff;
   color: #2563eb;
 

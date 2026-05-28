@@ -1,137 +1,164 @@
+// TodoListChild.jsx
+
 import React, { useContext, useState } from 'react'
 import {
-    MdCheckBox,
-    MdCheckBoxOutlineBlank,
-    MdRemoveCircleOutline
+  MdCheckBox,
+  MdCheckBoxOutlineBlank,
+  MdRemoveCircleOutline
 } from "react-icons/md"
 
 import styled from 'styled-components'
 import { TodoContext } from '../../no0_context/TodoContext'
 
-const TodoListChild = ({item}) => {
+const TodoListChild = ({ item}) => {
+  const {state, dispatch} = useContext(TodoContext);
 
-    const {dispatch} = useContext(TodoContext);
+  const [editing, setEditing] = useState(false)
+  const [value, setValue] = useState(item.subject)
 
-    const [editing, setEditing] = useState(false)
-    const [value, setValue] = useState(item.subject)
+  const handleToggle = () => {
+    dispatch({type:"toggle", payload: item.id})
+  }
 
-    const handleToggle = () => {
+  const handleUpdate = () => {
+    dispatch({type:"update", payload:{id:item.id, value}})
+    setEditing(false)
+  }
 
-        dispatch({
-            type : "TOGGLE",
-            payload : item.id
-        })
-    }
+  const handleDelete = () => {
+    dispatch({type:"delete", payload: item.id})
+  }
 
-    const handleUpdate = () => {
+  return (
+    <Container>
 
-        dispatch({
+      <CheckBoxArea onClick={handleToggle}>
+        {
+          item.checked
+            ? <MdCheckBox />
+            : <MdCheckBoxOutlineBlank />
+        }
+      </CheckBoxArea>
 
-            type : "UPDATE",
-
-            payload : {
-                id : item.id,
-                value
-            }
-        })
-
-        setEditing(false)
-    }
-
-    const handleDelete = () => {
-
-        dispatch({
-            type : "DELETE",
-            payload : item.id
-        })
-    }
-
-    return (
-        <ItemBox>
-
-            <CheckBox onClick={handleToggle}>
-                {
-                    item.checked
-                    ? <MdCheckBox/>
-                    : <MdCheckBoxOutlineBlank/>
+      <ContentArea>
+        {
+          editing ? (
+            <EditInput
+              type="text"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onBlur={handleUpdate}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.target.blur()
                 }
-            </CheckBox>
+              }}
+              autoFocus
+            />
+          ) : (
+            <Checked
+              $checked={item.checked}
+              onDoubleClick={() => setEditing(true)}
+            >
+              {item.subject}
+            </Checked>
+          )
+        }
+      </ContentArea>
 
-            <Content>
+      <DeleteButton onClick={handleDelete}>
+        <MdRemoveCircleOutline />
+      </DeleteButton>
 
-                {
-                    editing
-                    ?
-                    <EditInput
-                        value={value}
-                        onChange={(e)=>setValue(e.target.value)}
-                        onBlur={handleUpdate}
-                        onKeyDown={(e)=>{
-                            if(e.key==="Enter"){
-                                handleUpdate();
-                            }
-                        }}
-                        autoFocus
-                    />
-                    :
-                    <Checked
-                        $checked={item.checked}
-                        onDoubleClick={()=>setEditing(true)}
-                    >
-                        {item.subject}
-                    </Checked>
-                }
-
-            </Content>
-
-            <DeleteButton onClick={handleDelete}>
-                <MdRemoveCircleOutline/>
-            </DeleteButton>
-
-        </ItemBox>
-    )
+    </Container>
+  )
 }
 
 export default TodoListChild
 
-const ItemBox = styled.div`
-    display: flex;
-    align-items: center;
-    padding: 14px;
-    border-radius: 8px;
-    background: #f8f9fa;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 16px;
+
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+  transition: 0.2s;
+
+  &:hover{
+    transform: translateY(-2px);
+  }
 `
 
-const CheckBox = styled.div`
-    font-size: 24px;
-    cursor: pointer;
-    color: #7950f2;
+const CheckBoxArea = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+
+  color: #3b82f6;
+
+  cursor: pointer;
 `
 
-const Content = styled.div`
-    flex: 1;
-    margin-left: 12px;
+const ContentArea = styled.div`
+  flex: 1;
 `
 
 const Checked = styled.div`
-    font-size: 18px;
+  font-size: 18px;
 
-    text-decoration: ${({$checked}) =>
-        $checked ? "line-through" : "none"};
+  color: ${({ $checked }) =>
+    $checked ? "#999" : "#222"};
 
-    color: ${({$checked}) =>
-        $checked ? "#adb5bd" : "#212529"};
-`
+  text-decoration: ${({ $checked }) =>
+    $checked ? "line-through" : "none"};
 
-const DeleteButton = styled.div`
-    font-size: 24px;
-    color: #ff6b6b;
-    cursor: pointer;
+  transition: 0.2s;
+
+  cursor: pointer;
 `
 
 const EditInput = styled.input`
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+  width: 100%;
+
+  padding: 10px 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  outline: none;
+
+  &:focus{
+    border-color: #3b82f6;
+  }
+`
+
+const DeleteButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+
+  color: #ef4444;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+  &:hover{
+    transform: scale(1.1);
+  }
 `

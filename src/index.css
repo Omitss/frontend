@@ -1,27 +1,12 @@
-* {
-    margin : 0;
+*{
+    margin: 0;
     padding: 0;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 html,
 body,
-#root{ 
-    width: 100%;
-    min-height: 100vh;
-    /*필기2 보세요*/
-}
-
-body{
-    margin: 0;
-    overflow: hidden;
-    background: #f1f5f9;
-    /*overflow -> 스코롤과 영향*/
-}
-
 #root{
     width: 100%;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
