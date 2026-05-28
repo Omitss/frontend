@@ -1,4 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { userTotalGetApi } from "../apis/user.api"
+
+export const fetchUserTotalGet = createAsyncThunk(
+    "fetchUserTotalGet" ,
+    async(_, thunkApi) => {
+        try{
+            // const payload = await userTotalGetApi()
+            // return payload
+            return await userTotalGetApi() //덩크가 알아서 payload를 해줌
+        }catch(error){
+            return thunkApi.rejectWithValue(error.message)
+            
+        }
+    }
+)
+
 
 const initialUsers = [
     {id: 1, username: "john", password: "1111"},
@@ -34,6 +50,12 @@ const userSlice = createSlice({
             state.isLogin = false,
             state.username = ""
         }
+    },
+    extraReducers : (builder)=> {
+        builder
+            .addCase(fetchUserTotalGet.fulfilled, (state, action) => {
+                state.users = action.payload
+            })
     }
 })
 
