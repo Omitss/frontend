@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { act } from "react"
+import { register } from "./todoSlice"
 
 
 const initialUsers = [
@@ -17,39 +19,26 @@ const userSlice = createSlice({
     name : "userSlice",
     initalState,
     reducers : {
-
+        login : (state, action) => {
+            state.username =  action.payload,
+            state.isLogin = true
+        },
+        register : (state, action) => {
+            state.users = [
+                ...state.users,
+                {
+                    id : action.payload.id,
+                    username : action.payload.user.username,
+                    password : action.payload.password
+                }
+            ]
+        },
+        logout : (state) => {
+            state.isLogin = false,
+            state.username = " "
+        }
     },
 })
 
-
-const reducer = (state, action)=>{
-  switch(action.type){
-    case "login":
-      return{
-        ...state,
-        username: action.payload.username,
-        isLogin: true
-      }
-    case "register":
-      return {
-        ...state,
-        users: [
-          ...state.users,
-          {
-            id: action.payload.id,
-            username: action.payload.user.username,
-            password: action.payload.user.password
-          }
-        ]
-      }
-    case "logout":
-      return {
-        ...state,
-        isLogin: false,
-        username: ""
-      }
-    default:
-      return state;
-  }
-
-}
+export const {login, register, logout} = userSlice.actions;
+export default userSlice.reducer;
