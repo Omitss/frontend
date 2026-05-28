@@ -21,30 +21,44 @@ const HeaderBar = () => {
 
   return (
     <Container>
+
       <Logo onClick={() => navigate("/")}>
         MySystem
       </Logo>
+
       <Menu>
+
         {isLogin ?
+
           <UserSection>
+
             <UserName>
               👋 {username} 님
             </UserName>
+
             <LogoutButton onClick={handleLogout}>
               로그아웃
             </LogoutButton>
+
           </UserSection>
+
           :
+
           <ButtonGroup>
+
             <LoginButton onClick={() => navigate("/login")}>
               로그인
             </LoginButton>
+
             <RegisterButton onClick={() => navigate("/register")}>
               회원가입
             </RegisterButton>
+
           </ButtonGroup>
         }
+
       </Menu>
+
     </Container>
   )
 }

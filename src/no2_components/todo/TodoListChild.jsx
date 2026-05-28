@@ -7,12 +7,11 @@ import {
   MdRemoveCircleOutline
 } from "react-icons/md"
 import { useDispatch } from 'react-redux'
-
 import styled from 'styled-components'
 import { toggle, update, remove } from '../../no3_store/slices/todoSlice'
 // import { TodoContext } from '../../no0_context/TodoContext'
 
-const TodoListChild = ({item}) => {
+const TodoListChild = ({ item}) => {
   const dispatch = useDispatch();
 
   const [editing, setEditing] = useState(false)
@@ -22,11 +21,10 @@ const TodoListChild = ({item}) => {
     dispatch(update({id:item.id, value}))
     setEditing(false)
   }
-  
+
   return (
     <Container>
-
-      <CheckBoxArea onClick={()=>dispatch(toggle(item.id))}>
+      <CheckBoxArea onClick={()=> dispatch(toggle(item.id))}>
         {
           item.checked
             ? <MdCheckBox />

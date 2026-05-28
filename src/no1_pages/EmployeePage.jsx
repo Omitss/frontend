@@ -1,4 +1,5 @@
 // EmployeePage.jsx
+
 import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components';
 
@@ -7,7 +8,8 @@ import EmployeeTable from '../no2_components/employee/EmployeeTable'
 import EmployeeRegister from '../no2_components/employee/EmployeeRegister'
 import EmployeeUpdate from '../no2_components/employee/EmployeeUpdate'
 import { useDispatch, useSelector } from 'react-redux';
-import { setEmp, remove, setMode } from '../no3_store/slices/employeeSlice';
+// import { EmployeeContext } from '../no0_context/EmployeeContext';
+import { setEmp, remove, setMode} from '../no3_store/slices/employeeSlice';
 
 const EmployeePage = () => {
   const {selectedId, mode, empTable} = useSelector(state=>state.emp);
@@ -16,7 +18,7 @@ const EmployeePage = () => {
   useEffect(()=>{
     const newEmp = empTable.filter(item => item.id === selectedId)[0]
     selectedId &&
-    dispatch(setEmp(newEmp)) // 미들웨어 덩크에서 payload를 자동으로 만들어줌
+    dispatch(setEmp(newEmp))
   }, [selectedId, empTable])
 
   const handleDelete = () => {

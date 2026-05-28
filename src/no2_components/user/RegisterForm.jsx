@@ -33,22 +33,26 @@ const RegisterForm = () => {
       return;
     }
     dispatch(register({id: Date.now(), user}))
-
     alert("회원가입 성공")
-
     navigate("/login")
   }
 
   return (
     <Container>
+
       <Form onSubmit={handleSubmit}>
+
         <Logo>MySystem</Logo>
+
         <Title>회원가입</Title>
+
         <Description>
           새로운 계정을 생성하세요.
         </Description>
+
         <InputGroup>
           <Label>아이디</Label>
+
           <Input
             type="text"
             name="username"
@@ -57,8 +61,10 @@ const RegisterForm = () => {
             placeholder="아이디 입력"
           />
         </InputGroup>
+
         <InputGroup>
           <Label>비밀번호</Label>
+
           <Input
             type="password"
             name="password"
@@ -67,8 +73,10 @@ const RegisterForm = () => {
             placeholder="비밀번호 입력"
           />
         </InputGroup>
+
         <InputGroup>
           <Label>비밀번호 확인</Label>
+
           <Input
             type="password"
             name="confirmPassword"
@@ -77,17 +85,22 @@ const RegisterForm = () => {
             placeholder="비밀번호 다시 입력"
           />
         </InputGroup>
+
         <RegisterButton>
           회원가입
         </RegisterButton>
+
         <Divider />
+
         <LoginButton
           type="button"
           onClick={() => navigate("/login")}
         >
           이미 회원이신가요? 로그인
         </LoginButton>
+
       </Form>
+
     </Container>
   )
 }

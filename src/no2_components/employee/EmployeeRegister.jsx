@@ -1,6 +1,6 @@
 // EmployeeRegister.jsx
 
-import React, { useContext, useState } from 'react'
+import React, {useState } from 'react'
 import styled from 'styled-components';
 // import { EmployeeContext } from '../../no0_context/EmployeeContext';
 import { useDispatch } from 'react-redux';

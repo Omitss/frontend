@@ -1,17 +1,13 @@
 // EmployeeList.jsx
-
 import React from 'react'
 import styled from 'styled-components';
 // import { EmployeeContext } from '../../no0_context/EmployeeContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { select } from '../../no3_store/slices/employeeSlice';
 
-
 const EmployeeList = () => {
-  // const {state,  dispatch} = useContext(EmployeeContext);
   const {empTable, selectedId} =useSelector(state=>state.emp);
   const dispatch = useDispatch();
-  
   return (
     <Container>
       {/* {console.log(empTable)} */}
@@ -20,7 +16,7 @@ const EmployeeList = () => {
           <EmployeeButton
             key={item.id}
             $active={selectedId === item.id}
-            onClick={() =>dispatch(select(item.id))}
+            onClick={() => dispatch(select(item.id))}
           >
             {item.name}
           </EmployeeButton>

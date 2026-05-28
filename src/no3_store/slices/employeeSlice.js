@@ -17,42 +17,41 @@ const initialState = {
 }
 
 const employeeSlice = createSlice({
-    name : "employeeSlice",
+    name: "employeeSlice",
     initialState,
-    reducers : {
-        select :(state, action) =>{
+    reducers:{
+        select: (state, action) => {
             state.selectedId = action.payload
         },
-        setEmp : (state, action)=> {
+        setEmp: (state, action) => {
             state.emp = action.payload
         },
-        register : (state, action)=> {
+        register: (state, action) => {
             state.empTable = [
                 ...state.empTable,
                 {
                     ...action.payload.emp,
-                    id : action.payload.newId
+                    id: action.payload.newId
                 }
             ]
         },
-        update : ( state, action) => {
+        update: (state, action) => {
             state.empTable = state.empTable.map(emp=>(
-                emp.id === state.selectedId ?
-                action.payload 
-                : emp
-            ))
+                    emp.id === state.selectedId ?
+                    action.payload : emp
+                )
+            )
         },
-        remove : (state) => {
+        remove: (state) => {
             state.empTable = state.empTable.filter(emp=>(
                 emp.id !== state.selectedId
             ))
         },
-        setMode : (state, action) => {
+        setMode: (state,action) => {
             state.mode = action.payload
         }
+
     }
 })
-
-
-export const {setMode, remove, update, register, setEmp, select } = employeeSlice.actions;
+export const {setMode, remove, register, update, select, setEmp } = employeeSlice.actions;
 export default employeeSlice.reducer;

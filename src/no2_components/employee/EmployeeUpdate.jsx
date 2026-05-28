@@ -7,8 +7,8 @@ import { update } from '../../no3_store/slices/employeeSlice';
 // import { EmployeeContext } from '../../no0_context/EmployeeContext';
 
 const EmployeeUpdate = () => {
-    const dispatch = useDispatch();
     const {emp} = useSelector(state=>state.emp);
+    const dispatch = useDispatch();
     const [newEmp, setNewEmp] = useState(emp);
     useEffect(() => {
         emp &&
@@ -20,19 +20,14 @@ const EmployeeUpdate = () => {
             {...prev, [name]: value}
         ))
     }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(update(newEmp))
     }
-
     return (
         <Form onSubmit={handleSubmit}>
-
             <InputGroup>
-
                 <Label>이름</Label>
-
                 <Input
                     type="text"
                     name="name"
@@ -40,11 +35,8 @@ const EmployeeUpdate = () => {
                     onChange={handleChange}
                     placeholder='이름'
                 />
-
             </InputGroup>
-
             <InputGroup>
-
                 <Label>이메일</Label>
 
                 <Input

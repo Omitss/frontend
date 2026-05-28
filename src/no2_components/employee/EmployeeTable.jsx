@@ -6,7 +6,7 @@ import styled from 'styled-components';
 // import { EmployeeContext } from '../../no0_context/EmployeeContext';
 
 const EmployeeTable = () => {
-  const {emp} = useSelector(state => state.emp);
+  const {emp} = useSelector(state=>state.emp);
   return (
     <Table>
 
