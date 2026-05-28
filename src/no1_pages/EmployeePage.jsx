@@ -1,5 +1,4 @@
 // EmployeePage.jsx
-
 import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components';
 
@@ -7,15 +6,17 @@ import EmployeeList from '../no2_components/employee/EmployeeList'
 import EmployeeTable from '../no2_components/employee/EmployeeTable'
 import EmployeeRegister from '../no2_components/employee/EmployeeRegister'
 import EmployeeUpdate from '../no2_components/employee/EmployeeUpdate'
-import { EmployeeContext } from '../no0_context/EmployeeContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { setEmp, remove, setMode } from '../no3_store/slices/employeeSlice';
 
 const EmployeePage = () => {
-  const {state, dispatch} = useContext(EmployeeContext);
-  const {selectedId, mode, empTable} = state;
+  const {selectedId, mode, empTable} = useSelector(state=>state.emp);
+  const dispatch = useDispatch();
 
   useEffect(()=>{
+    const newEmp = empTable.filter(item => item.id === selectedId)[0]
     selectedId &&
-    dispatch({type:"set_emp", payload: empTable.filter(item => item.id === selectedId)[0]})
+    dispatch(setEmp(newEmp)) // 미들웨어 덩크에서 payload를 자동으로 만들어줌
   }, [selectedId, empTable])
 
   const handleDelete = () => {
@@ -24,7 +25,7 @@ const EmployeePage = () => {
       alert("삭제할 데이터를 선택하세요");
       return;
     }
-    dispatch({type:"delete"})
+    dispatch(remove())
   }
 
   return (
@@ -61,19 +62,19 @@ const EmployeePage = () => {
 
             <ButtonGroup>
               <ActionButton
-                onClick={() => dispatch({type: "mode", payload: "register"})}
+                onClick={() => dispatch(setMode("register"))}
               >
                 등록
               </ActionButton>
 
               <ActionButton
-                onClick={() => dispatch({type: "mode", payload: "update"})}
+                onClick={() => dispatch(setMode("update"))}
               >
                 수정
               </ActionButton>
 
               <DeleteButton
-                onClick={() => dispatch({type: "mode", payload: "delete"})}
+                onClick={() => dispatch(setMode("delete"))}
               >
                 삭제
               </DeleteButton>

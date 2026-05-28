@@ -9,7 +9,7 @@ const initialEmps = [
 const initialEmp = {
   id: '', name: '', email: '', job: '', pay:''
 }
-const initalState = {
+const initialState = {
   empTable: initialEmps,
   emp: initialEmp,
   mode: '',
@@ -18,7 +18,7 @@ const initalState = {
 
 const employeeSlice = createSlice({
     name : "employeeSlice",
-    initalState,
+    initialState,
     reducers : {
         select :(state, action) =>{
             state.selectedId = action.payload
@@ -31,7 +31,7 @@ const employeeSlice = createSlice({
                 ...state.empTable,
                 {
                     ...action.payload.emp,
-                    id : action.payload.id
+                    id : action.payload.newId
                 }
             ]
         },
@@ -47,12 +47,12 @@ const employeeSlice = createSlice({
                 emp.id !== state.selectedId
             ))
         },
-        mode : (state, action) => {
+        setMode : (state, action) => {
             state.mode = action.payload
         }
     }
 })
 
 
-export const {mode, remove, update, register, setEmp, select } = employeeSlice.actions;
+export const {setMode, remove, update, register, setEmp, select } = employeeSlice.actions;
 export default employeeSlice.reducer;

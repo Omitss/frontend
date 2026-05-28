@@ -3,59 +3,48 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { UserContext } from '../../no0_context/UserContext'
+import { useDispatch, useSelector } from 'react-redux'
+// import { UserContext } from '../../no0_context/UserContext'
+import { logout } from '../../no3_store/slices/userSlice'
 
 const HeaderBar = () => {
-  const {state, dispatch} = useContext(UserContext);
+  const {isLogin, username} = useSelector(state=>state.user)
+  const dispatch = useDispatch();
   // const {isLogin} = state;
   const navigate = useNavigate();
 
   const handleLogout = () => {
-      dispatch({type:"logout"})
+      dispatch(logout())
       alert("로그아웃 되었습니다.")
       navigate("/login")
   }
 
   return (
     <Container>
-
       <Logo onClick={() => navigate("/")}>
         MySystem
       </Logo>
-
       <Menu>
-
-        {state.isLogin ?
-
+        {isLogin ?
           <UserSection>
-
             <UserName>
-              👋 {state.username} 님
+              👋 {username} 님
             </UserName>
-
             <LogoutButton onClick={handleLogout}>
               로그아웃
             </LogoutButton>
-
           </UserSection>
-
           :
-
           <ButtonGroup>
-
             <LoginButton onClick={() => navigate("/login")}>
               로그인
             </LoginButton>
-
             <RegisterButton onClick={() => navigate("/register")}>
               회원가입
             </RegisterButton>
-
           </ButtonGroup>
         }
-
       </Menu>
-
     </Container>
   )
 }

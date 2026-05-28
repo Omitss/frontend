@@ -1,12 +1,14 @@
 // EmployeeUpdate.jsx
 
 import React, { useEffect, useState, useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { EmployeeContext } from '../../no0_context/EmployeeContext';
+import { update } from '../../no3_store/slices/employeeSlice';
+// import { EmployeeContext } from '../../no0_context/EmployeeContext';
 
 const EmployeeUpdate = () => {
-    const {state, dispatch} = useContext(EmployeeContext)
-    const {emp} = state;
+    const dispatch = useDispatch();
+    const {emp} = useSelector(state=>state.emp);
     const [newEmp, setNewEmp] = useState(emp);
     useEffect(() => {
         emp &&
@@ -20,10 +22,8 @@ const EmployeeUpdate = () => {
     }
 
     const handleSubmit = (event) => {
-
         event.preventDefault();
-
-       dispatch({type:"update", payload: newEmp})
+        dispatch(update(newEmp))
     }
 
     return (

@@ -11,7 +11,6 @@ const TodoPage = () => {
   return (
     <TodoTemplate>
       <TodoInsert/>
-
       <TodoList/>
     </TodoTemplate>
   )

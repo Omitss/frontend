@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { act } from "react"
-import { register } from "./todoSlice"
+// import { register } from "./todoSlice"
 
 
 const initialUsers = [
@@ -9,7 +9,7 @@ const initialUsers = [
   {id: 3, username: "susan", password: "1111"},
   {id: 4, username: "sue", password: "1111"},
 ]
-const initalState = {
+const initialState  = {
     users: initialUsers,
     username: '',
     isLogin: false
@@ -17,7 +17,7 @@ const initalState = {
 
 const userSlice = createSlice({
     name : "userSlice",
-    initalState,
+    initialState,
     reducers : {
         login : (state, action) => {
             state.username =  action.payload,
